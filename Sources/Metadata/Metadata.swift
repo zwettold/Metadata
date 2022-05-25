@@ -1,6 +1,2 @@
-public struct Metadata {
-    public private(set) var text = "Hello, World!"
-
-    public init() {
-    }
-}
+// Hi there! 👋
+// Glad you're here. Let's figure out the design this library. 🦧

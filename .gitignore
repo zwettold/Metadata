@@ -1,4 +1,10 @@
+# macOS
 .DS_Store
+
+# Visual Studio Code
+.vscode/
+
+# Swift Package Manager
 /.build
 /Packages
 /*.xcodeproj
