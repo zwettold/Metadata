@@ -7,6 +7,21 @@ public enum MetadataError: LocalizedError, Hashable {
     /// - Parameter task: The metadata task unit that is in an invalid state.
     case invalidTaskState(task: MetadataTask? = nil)
 
+    /// The metadata network task has failed due to a client-side error.
+    ///
+    /// - Parameters:
+    ///   - request: The request that caused the error.
+    ///   - error: The error that caused the network task to fail.
+    case invalidRequest(_ request: URLRequest? = nil, error: Error? = nil)
+
+    /// The metadata network task has failed due to a server-side error.
+    ///
+    /// - Parameters:
+    ///   - request: The request that caused the error.
+    ///   - response: The response that caused the error.
+    ///   - data: The data that caused the error.
+    case invalidResponse(_ response: URLResponse? = nil, request: URLRequest? = nil, data: Data? = nil)
+
     /// An error that indicates a failure that is not covered by a more specific error case.
     ///
     /// Whenever possible, more specific error cases should be thrown. Fallback to `MetadataError.generic` _only_ when
@@ -33,6 +48,11 @@ public enum MetadataError: LocalizedError, Hashable {
                 return "The task unit is in an invalid state."
             }
             return "The task unit with an id \(task.id) is in an invalid state."
+        case .invalidRequest(let request, let error):
+            if let request = request {
+                return "The metadata request \(request) has failed with an error: \(String(describing: error))."
+            }
+            return "The metadata request has failed with an error: \(String(describing: error))."
         case .generic(let errorDescription, _, _, _):
             return errorDescription
         }
